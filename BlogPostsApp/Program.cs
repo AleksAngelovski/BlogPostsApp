@@ -1,4 +1,6 @@
 using BlogPostsApp.Data;
+using BlogPostsApp.Data.Model;
+using BlogPostsApp.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddTransient<IRepository<Blog>, BlogsRepository<Blog>>();
+builder.Services.AddTransient<IRepository<Post>, BlogsRepository<Post>>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => 
 {
