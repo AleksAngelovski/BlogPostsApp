@@ -9,11 +9,26 @@
 
         public string OwnerName { get; private set; }
 
-        public List<Post> Posts { get; private set; }
+        public virtual List<Post> Posts { get; private set; }
 
         public Blog()
         {
             Posts = Posts ?? new List<Post>() { };
         }
+
+        public Blog(string urlEndpoint, int ownerId, string ownerName)
+        {
+            
+            if (string.IsNullOrEmpty(ownerName))
+            {
+                throw new Exception("Please provide a valid owner name");
+            }
+            Url = "/" + Url;
+            OwnerId = ownerId;
+            OwnerName = ownerName;
+            Posts = Posts ?? new List<Post>() { };
+
+        }
+        
     }
 }
