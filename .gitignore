@@ -7,7 +7,7 @@
 *.dll
 *.pdb
 *.sentinel
-
+**bin/
 
 # User-specific files
 *.rsuser
