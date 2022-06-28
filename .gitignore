@@ -7,7 +7,7 @@
 *.dll
 *.pdb
 *.sentinel
-**bin/
+BlogPostsApp/*/bin
 
 # User-specific files
 *.rsuser
