@@ -10,7 +10,7 @@
         public int? BlogId { get; set; }
         public virtual Blog Blog { get; set; }
 
-        public Post()
+        private Post()
         {
 
         }

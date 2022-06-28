@@ -5,23 +5,24 @@
     
 @if (SignInManager.IsSignedIn(User))
 {
+    //TODO: at /PersonalBlog/@username : we should have a way to fetch the blog for specific user. or to map a username route, which would take us to a blog with the right name
     IdentityUser user = await UserManager.GetUserAsync(User);
     string userName = await UserManager.GetUserNameAsync(user);
     
     <ul class="navbar-nav flex-grow-1">
          <li class="nav-item">
              
-             <a class="nav-link text-dark" asp-area="" asp-page="/Blogs/@userName">Signed in @userName</a>
+             <a class="nav-link text-dark" asp-area="" asp-page="/PersonalBlog" asp-route-blogfilter="@userName" >Signed in @userName</a>
          </li>
          <li class="nav-item">
-             <a class="nav-link text-dark" asp-area="" asp-page="/Blogs"> All Blogs</a>
+             <a class="nav-link text-dark" asp-area="" asp-page="/AllBlogs"> All Blogs</a>
          </li>
      </ul>
 }else
 {   
     <ul class="navbar-nav flex-grow-1">
          <li class="nav-item">
-             <a class="nav-link text-dark" asp-area="" asp-page="/Blogs"> All Blogs</a>
+             <a class="nav-link text-dark" asp-area="" asp-page="/AllBlogs"> All Blogs</a>
          </li>
      </ul>
     

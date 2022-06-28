@@ -20,7 +20,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    //options.Conventions.AddPageRoute("/PersonalBlog/{blogName?}", "/Blog/{blogName?}");
+});
 
 var app = builder.Build();
 
