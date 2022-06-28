@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+    
+@if (SignInManager.IsSignedIn(User))
+{
+    IdentityUser user = await UserManager.GetUserAsync(User);
+    string userName = await UserManager.GetUserNameAsync(user);
+    
+    <ul class="navbar-nav flex-grow-1">
+         <li class="nav-item">
+             
+             <a class="nav-link text-dark" asp-area="" asp-page="/Blogs/@userName">Signed in @userName</a>
+         </li>
+         <li class="nav-item">
+             <a class="nav-link text-dark" asp-area="" asp-page="/Blogs"> All Blogs</a>
+         </li>
+     </ul>
+}else
+{   
+    <ul class="navbar-nav flex-grow-1">
+         <li class="nav-item">
+             <a class="nav-link text-dark" asp-area="" asp-page="/Blogs"> All Blogs</a>
+         </li>
+     </ul>
+    
+}
