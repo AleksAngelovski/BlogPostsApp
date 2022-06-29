@@ -6,4 +6,20 @@
 <div class="text-center">
     <h1 class="display-4">Here are all the blogs: </h1>
     
+    <div class="container">
+    <div class="row">
+        @foreach (var item in Model.AllBlogs)
+        {
+            <div class="col-md-3 m-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Blog Name: @item.Url.Trim('/')</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Url</h6>
+                        <p class="card-text">@item.OwnerName</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 </div>

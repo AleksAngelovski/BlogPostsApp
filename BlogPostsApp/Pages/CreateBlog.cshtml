@@ -1,0 +1,22 @@
+﻿@page
+@model BlogPostsApp.Pages.CreateBlogModel
+@{
+}
+
+<div class="container">
+    <div class="row ">
+        <div class="col-md-6 offset-md-3">
+            <form method="POST">
+                <legend>Create A New Unique BLog</legend>
+                <div class="mb-3">
+                    <label for="txtName" class="form-label">Unique Blog Url</label>
+                    <input asp-for="BlogVM.Url" type="text" class="form-control" id="txtName" />
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+ 
+    </div>
+ 
+</div>

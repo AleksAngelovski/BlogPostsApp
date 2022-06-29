@@ -7,4 +7,31 @@
 <div class="text-center">
     <h1 class="display-4">:Blog for @Model.Name</h1>
     
+    <div class="container">
+    <div class="row">
+
+            <div class="col-md-3 m-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@Model.Url</h6>
+                        <p class="card-text">@Model.Url</p>
+                    </div>
+                </div>
+            </div>
+
+            @foreach(var item in Model.BloggerPosts)
+            {
+                <div class="col-md-3 m-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Content</h6>
+                        <p class="card-text">@item.DateCreated</p>
+                    </div>
+                </div>
+            </div>
+            }
+    </div>
+</div>
 </div>

@@ -1,3 +1,4 @@
+using BlogPostsApp.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,7 +11,11 @@ namespace BlogPostsApp.Pages
         [BindProperty]
         public string Name { get; set; }
 
+        [BindProperty]
         public string OwnerName { get; set; }
+
+        [BindProperty]
+        public List<Post> BloggerPosts { get; set; } 
 
         public PersonalBlogModel(ILogger<PersonalBlogModel> logger)
         {
