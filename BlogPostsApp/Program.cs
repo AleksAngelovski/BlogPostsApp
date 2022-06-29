@@ -12,8 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddTransient<IRepository<Blog>, BlogsRepository<Blog>>();
-builder.Services.AddTransient<IRepository<Post>, BlogsRepository<Post>>();
+builder.Services.AddScoped<IRepository<Blog>, BlogsRepository<Blog>>();
+builder.Services.AddScoped<IRepository<Post>, BlogsRepository<Post>>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => 
 {
