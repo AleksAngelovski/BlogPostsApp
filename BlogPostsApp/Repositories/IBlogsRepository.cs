@@ -1,7 +1,7 @@
 ﻿namespace BlogPostsApp.Repositories
 {
-    public interface IBlogsRepository<T> where T : class
+    public interface IBlogsRepository<T> : IRepository<T> where T : class
     {
-
+        Task<T> GetByEmailAsync(string email);
     }
 }

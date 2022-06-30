@@ -4,8 +4,8 @@
     {
         Task<T> GetByIdAsync(int id);
         Task Add(T entity);
-        void Edit(T entity);
-        void Delete(T entity);
+        Task Edit(T entity);
+        Task Delete(T entity);
 
         Task<List<T>> GetAllAsync();
         Task SaveAllAsync();

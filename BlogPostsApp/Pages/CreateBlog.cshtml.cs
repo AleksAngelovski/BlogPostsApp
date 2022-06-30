@@ -11,9 +11,9 @@ namespace BlogPostsApp.Pages
     [Authorize]
     public class CreateBlogModel : PageModel
     {
-        private readonly IRepository<Blog> _blogRepository;
+        private readonly IBlogsRepository<Blog> _blogRepository;
 
-        public CreateBlogModel(IRepository<Blog> blogRepository)
+        public CreateBlogModel(IBlogsRepository<Blog> blogRepository)
         {
             this._blogRepository = blogRepository;
         }
@@ -27,9 +27,29 @@ namespace BlogPostsApp.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await _blogRepository.Add(new Blog(BlogVM.Url, User.FindFirst(ClaimTypes.NameIdentifier).Value, User.Identity.Name));
-            await _blogRepository.SaveAllAsync();
-            return Redirect("AllBlogs");
+            try 
+            {
+                string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                string userName = User.Identity.Name;
+                if ((await _blogRepository.GetByEmailAsync(userName)) != null)
+                {
+                    ViewData["Error"] = "Blog associated with this account already exists, Max blog limit = 1";
+                    return Page();
+                }
+                
+                await _blogRepository.Add(new Blog(BlogVM.Url, userId, userName));
+                await _blogRepository.SaveAllAsync();
+                return Redirect("AllBlogs");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                ViewData["Error"] = ex.Message;
+                return Page();
+            }
+
+            //return Redirect("AllBlogs");
         }
     }
 }

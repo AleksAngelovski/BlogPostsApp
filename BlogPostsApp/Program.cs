@@ -10,9 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+//TODO: Learn How to Make this work: by adding options constructor to our blogging context.
+//builder.Services.AddDbContext<BloggingContext>(options =>
+//    options.UseSqlite(connectionString))
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddScoped<IRepository<Blog>, BlogsRepository<Blog>>();
+builder.Services.AddScoped<IBlogsRepository<Blog>, BlogsRepository<Blog>>();
 builder.Services.AddScoped<IRepository<Post>, BlogsRepository<Post>>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => 

@@ -9,11 +9,11 @@ namespace BlogPostsApp.Pages
     public class AllBlogsModel : PageModel
     {
         private readonly ILogger<AllBlogsModel> _logger;
-        private readonly IRepository<Blog> _blogsRepository;
+        private readonly IBlogsRepository<Blog> _blogsRepository;
 
         [BindProperty]
         public IEnumerable<Blog> AllBlogs { get; set; }
-        public AllBlogsModel(ILogger<AllBlogsModel> logger, IRepository<Blog> blogsRepository)
+        public AllBlogsModel(ILogger<AllBlogsModel> logger, IBlogsRepository<Blog> blogsRepository)
         {
             this._logger = logger;
             this._blogsRepository = blogsRepository;
