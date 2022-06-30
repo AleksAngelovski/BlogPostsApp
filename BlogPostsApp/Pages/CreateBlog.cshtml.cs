@@ -17,7 +17,7 @@ namespace BlogPostsApp.Pages
         {
             this._blogRepository = blogRepository;
         }
-
+        public string ErrorMessage { get; set; }
         [BindProperty]
         public BlogVM BlogVM {get;set;}
         public void OnGet()
@@ -27,16 +27,30 @@ namespace BlogPostsApp.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            try 
+            try
             {
                 string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 string userName = User.Identity.Name;
-                if ((await _blogRepository.GetByEmailAsync(userName)) != null)
+
+                Blog loggedInUserBlog = await _blogRepository.GetByEmailAsync(userName);
+                if (loggedInUserBlog != null)
                 {
-                    ViewData["Error"] = "Blog associated with this account already exists, Max blog limit = 1";
+                    ErrorMessage = "Blog associated with this account already exists, Max blog limit = 1";
                     return Page();
                 }
-                
+                if (string.IsNullOrWhiteSpace(BlogVM.Url))
+                {
+                    ErrorMessage = "Please provide a good Blog Url";
+                    return Page();
+                }
+                string url = "/" + BlogVM.Url;
+                Blog existingBlogUrl = await _blogRepository.GetByUrlAsync(url);
+                if (existingBlogUrl != null)
+                {
+                    ErrorMessage = "Find a Unique Blog Name, Blog name already in use";
+                    return Page();
+                }
+
                 await _blogRepository.Add(new Blog(BlogVM.Url, userId, userName));
                 await _blogRepository.SaveAllAsync();
                 return Redirect("AllBlogs");

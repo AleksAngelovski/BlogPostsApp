@@ -1,0 +1,29 @@
+﻿@page
+@model BlogPostsApp.Pages.DeleteBlogModel
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <p class="text-danger">@Model.ErrorMessage</p>
+    </div>
+    <div class="row">
+        <div class="col-md-3 m-3">
+            <legend>Confirm To Delete</legend>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.BlogVm.Url</h5>
+                    <div>
+                        <form method="post">
+                            <input type="hidden" value="@Model.BlogVm.OwnerId" />
+                            <input type="hidden" value="@Model.BlogVm.Url" />
+                            
+                            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

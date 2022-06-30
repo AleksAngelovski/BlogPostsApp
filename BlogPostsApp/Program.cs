@@ -15,8 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    options.UseSqlite(connectionString))
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddScoped<IBlogsRepository<Blog>, BlogsRepository<Blog>>();
-builder.Services.AddScoped<IRepository<Post>, BlogsRepository<Post>>();
+builder.Services.AddScoped<IBlogsRepository<Blog>, BlogsRepository>();
+//builder.Services.AddScoped<IRepository<Post>, PostRepository>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => 
 {

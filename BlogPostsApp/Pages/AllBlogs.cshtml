@@ -16,6 +16,8 @@
                         <h5 class="card-title">Blog Name: @item.Url.Trim('/')</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.Url</h6>
                         <p class="card-text">@item.OwnerName</p>
+                        <a class="btn btn-danger" asp-area="" asp-page="/DeleteBlog" asp-route-ownerid="@item.OwnerId" asp-route-blogurl="@item.Url">Delete</a>
+
                     </div>
                 </div>
             </div>
