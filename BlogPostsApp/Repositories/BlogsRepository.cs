@@ -6,32 +6,32 @@ namespace BlogPostsApp.Repositories
 {
     public class BlogsRepository :IBlogsRepository<Blog>
     {
-        private BloggingContext context;
+        private BloggingContext _context;
         private DbSet<Blog> dbSet;
 
-        public BlogsRepository()
+        public BlogsRepository(BloggingContext context)
         {
-            context = new BloggingContext();
+            _context = context;
             dbSet = context.Set<Blog>();
         }
 
         public async Task Add(Blog entity)
         {
             dbSet.Add(entity);
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(Blog entity)
         {
             dbSet.Remove(entity);
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
         }
 
         public async Task Edit(Blog entity)
         {
             dbSet.Update(entity);
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<Blog>> GetAllAsync()
@@ -55,7 +55,7 @@ namespace BlogPostsApp.Repositories
         }
         public async Task SaveAllAsync()
         {
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
 

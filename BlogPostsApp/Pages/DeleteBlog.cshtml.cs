@@ -69,7 +69,7 @@ namespace BlogPostsApp.Pages
                 return Page();
             }
 
-            _blogsRepository.Delete(blog);
+            await _blogsRepository.Delete(blog);
 
             return Redirect("AllBlogs");
         }

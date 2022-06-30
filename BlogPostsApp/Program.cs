@@ -7,9 +7,13 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("IdentityConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddDbContext<BloggingContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BlogsConnection")));
+
 //TODO: Learn How to Make this work: by adding options constructor to our blogging context.
 //builder.Services.AddDbContext<BloggingContext>(options =>
 //    options.UseSqlite(connectionString))

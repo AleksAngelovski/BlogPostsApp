@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlogPostsApp.Migrations
 {
-    public partial class AddingBlogsAndPosts_Initial : Migration
+    public partial class Blogging_Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,11 @@ namespace BlogPostsApp.Migrations
                 name: "Blogs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: false),
-                    OwnerId = table.Column<int>(type: "INTEGER", nullable: false),
-                    OwnerName = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,12 +28,12 @@ namespace BlogPostsApp.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Content = table.Column<string>(type: "TEXT", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    BlogId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BlogId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,8 +42,7 @@ namespace BlogPostsApp.Migrations
                         name: "FK_Posts_Blogs_BlogId",
                         column: x => x.BlogId,
                         principalTable: "Blogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
